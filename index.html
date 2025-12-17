@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Fundación Aprender – Tiendita Down</title>
+  <link rel="stylesheet" href="/Fundacion Aprender/css/styles.css">
+</head>
+<body>
+<header>
+  <h1>Fundación Aprender</h1>
+  <p>Tiendita Down – Inclusión y Amor</p>
+</header>
+
+<nav>
+  <button class="active" onclick="showSection('catalogo')">Catálogo</button>
+  <button onclick="showSection('inventario')">Inventario</button>
+  <button onclick="showSection('qr')">QR Donaciones</button>
+</nav>
+
+<!-- ===== CATÁLOGO ===== -->
+<section id="catalogo" class="active">
+  <div class="filters">
+    <button onclick="filterCat('all')">Todos</button>
+    <button onclick="filterCat('velas')">Velas</button>
+    <button onclick="filterCat('bisuteria')">Bisutería</button>
+    <button onclick="filterCat('maderas')">Maderas</button>
+    <button onclick="filterCat('cuadros')">Cuadros</button>
+    <button onclick="filterCat('perfumes')">Perfumes</button>
+    <button onclick="filterCat('collares')">Collares</button>
+    <button onclick="filterCat('aretes')">Aretes</button>
+    <button onclick="filterCat('pulseras')">Pulseras</button>
+  </div>
+  <div class="catalogo" id="catalogoGrid"></div>
+</section>
+
+<!-- ===== INVENTARIO ===== -->
+<section id="inventario">
+  <h2>Inventario de Ventas</h2>
+  <button class="success" onclick="exportExcel()">Exportar ventas del día</button>
+  <table id="tablaVentas">
+    <thead>
+      <tr><th>Producto</th><th>Categoría</th><th>Cantidad</th><th>Precio</th><th>Total</th><th>Acción</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<!-- ===== QR ===== -->
+<section id="qr">
+  <div class="qr-container">
+    <div class="qr-card" onclick="this.classList.toggle('flipped')">
+      <div class="qr-inner">
+        <div class="qr-face">
+          <h2>Fundación Aprender</h2>
+          <h4>Tiendita Down</h4>
+          <p>Cada compra y donación apoya sueños, inclusión y oportunidades.</p>
+          <p><strong>Toca para donar</strong></p>
+        </div>
+        <div class="qr-face qr-back">
+          <img src="assets/qr-nequi.png" alt="QR Nequi">
+          <p>Gracias por apoyar</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MODAL VELAS ===== -->
+<div class="modal" id="velaModal">
+  <div class="modal-content">
+    <h3>Personaliza tu vela</h3>
+    <p>Selecciona envase</p>
+    <div class="options" id="envases"></div>
+    <p>Selecciona esencia</p>
+    <div class="options" id="esencias"></div>
+    <button class="success" onclick="addVela()">Agregar venta</button>
+  </div>
+</div>
+
+<script src="/Fundacion Aprender/js/index.js"></script>
+</body>
+</html>
