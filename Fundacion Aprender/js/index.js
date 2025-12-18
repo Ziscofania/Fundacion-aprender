@@ -83,23 +83,16 @@ function renderCatalogo(lista = productos) {
   grid.innerHTML = '';
 
   lista.forEach(p => {
-    const card = document.createElement('article');
-    card.className = 'product-card';
-    card.dataset.cat = p.cat;
-
-    card.innerHTML = `
-      <img src="${p.img}" alt="${p.nombre}">
-      <h4>${p.nombre}</h4>
-      <p class="price">$${p.precio.toLocaleString('es-CO')}</p>
-      <button onclick="addProduct('${p.nombre}','${p.cat}',${p.precio})">
-        Agregar
-      </button>
+    grid.innerHTML += `
+      <article class="product-card">
+        <img src="${p.img}" alt="${p.nombre}">
+        <h4>${p.nombre}</h4>
+        <p class="price">$${p.precio.toLocaleString('es-CO')}</p>
+        <button onclick="addProduct(${p.id})">Agregar</button>
+      </article>
     `;
-
-    grid.appendChild(card);
   });
 }
-
 
 function filterCat(cat) {
   if (cat === 'all') renderCatalogo(productos);
@@ -107,14 +100,11 @@ function filterCat(cat) {
 }
 
 // =================================================
-// VENTAS
+// AGREGAR PRODUCTO (FIX CLAVE)
 // =================================================
-function seleccionarPago(tipo) {
-  tipoPagoActual = tipo;
-}
-
-function addVenta(id) {
-  const p = productos.find(x => x.id === id);
+function addProduct(id) {
+  const p = productos.find(prod => prod.id === id);
+  if (!p) return;
 
   ventas.push({
     nombre: p.nombre,
@@ -127,8 +117,12 @@ function addVenta(id) {
   });
 
   saveVentas();
+  showToast(`✔ ${p.nombre} agregado`);
 }
 
+// =================================================
+// VENTAS
+// =================================================
 function saveVentas() {
   localStorage.setItem('ventas', JSON.stringify(ventas));
   renderVentas();
@@ -145,8 +139,8 @@ function renderVentas() {
         <td>${v.nombre}</td>
         <td>${v.cat}</td>
         <td>${v.cant}</td>
-        <td>$${v.precio}</td>
-        <td>$${v.total}</td>
+        <td>$${v.precio.toLocaleString()}</td>
+        <td>$${v.total.toLocaleString()}</td>
         <td>${v.pago}</td>
         <td>${v.fecha}</td>
         <td><button onclick="delVenta(${i})">X</button></td>
@@ -161,59 +155,20 @@ function delVenta(i) {
 }
 
 // =================================================
-// VELAS PERSONALIZADAS
+// TOAST / NOTIFICACIÓN
 // =================================================
-function openVela() {
-  velaConfig = { envase: null, esencia: null };
-  document.getElementById('velaModal').style.display = 'flex';
-  loadOptions();
-}
+function showToast(msg) {
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.innerText = msg;
 
-function loadOptions() {
-  const envDiv = document.getElementById('envases');
-  const esDiv = document.getElementById('esencias');
+  document.body.appendChild(toast);
 
-  envDiv.innerHTML = '';
-  esDiv.innerHTML = '';
-
-  Object.keys(envases).forEach(e => {
-    envDiv.innerHTML += `<button onclick="selectOpt('envase','${e}',this)">${e}</button>`;
-  });
-
-  Object.keys(esencias).forEach(e => {
-    esDiv.innerHTML += `<button onclick="selectOpt('esencia','${e}',this)">${e}</button>`;
-  });
-}
-
-function selectOpt(tipo, valor, el) {
-  velaConfig[tipo] = valor;
-  el.parentNode.querySelectorAll('button').forEach(b => b.classList.remove('selected'));
-  el.classList.add('selected');
-}
-
-function addVela() {
-  if (!velaConfig.envase || !velaConfig.esencia) {
-    alert('Selecciona envase y esencia');
-    return;
-  }
-
-  const precio =
-    productos[0].precio +
-    envases[velaConfig.envase] +
-    esencias[velaConfig.esencia];
-
-  ventas.push({
-    nombre: `Vela ${velaConfig.envase} - ${velaConfig.esencia}`,
-    cat: 'velas',
-    cant: 1,
-    precio,
-    total: precio,
-    pago: tipoPagoActual,
-    fecha: new Date().toLocaleString()
-  });
-
-  saveVentas();
-  document.getElementById('velaModal').style.display = 'none';
+  setTimeout(() => toast.classList.add('show'), 50);
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => toast.remove(), 300);
+  }, 2500);
 }
 
 // =================================================
@@ -240,5 +195,5 @@ function exportExcel() {
 // =================================================
 // INIT
 // =================================================
-renderCatalogo(productos);
+renderCatalogo();
 renderVentas();
