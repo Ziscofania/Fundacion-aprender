@@ -3,8 +3,8 @@
 // =================================================
 const productos = [
 
-  { id: 1, nombre: 'Vela artesanal pequeña', cat: 'velas', precio: 12000, img: '/Fundacion Aprender/assets/vela pequena.jpeg' },
-  { id: 2, nombre: 'Vela artesanal alta', cat: 'velas', precio: 18000, img: '/Fundacion Aprender/assets/vela alta de.jpeg' },
+  { id: 1, nombre: 'Vela artesanal pequeña', cat: 'velas', precio: 12000, img: '/Fundacion Aprender/assets/vela pequeña.png' },
+  { id: 2, nombre: 'Vela artesanal alta', cat: 'velas', precio: 18000, img: '/Fundacion Aprender/assets/vela alta decorativa.jpeg' },
   { id: 3, nombre: 'Vela con base', cat: 'velas', precio: 20000, img: '/Fundacion Aprender/assets/vela con base.jpeg' },
   { id: 4, nombre: 'Vela con corcho', cat: 'velas', precio: 22000, img: '/Fundacion Aprender/assets/vela con corcho.jpeg' },
   { id: 5, nombre: 'Vela con tapón', cat: 'velas', precio: 22000, img: '/Fundacion Aprender/assets/vela con tapon.jpeg' },
@@ -12,25 +12,26 @@ const productos = [
   { id: 7, nombre: 'Vela de barril', cat: 'velas', precio: 28000, img: '/Fundacion Aprender/assets/vela de barril.jpeg' },
   { id: 8, nombre: 'Vela de cilindro', cat: 'velas', precio: 24000, img: '/Fundacion Aprender/assets/vela de cilindro.jpeg' },
   { id: 9, nombre: 'Vela de cera completa', cat: 'velas', precio: 26000, img: '/Fundacion Aprender/assets/vela de cera completa.jpeg' },
-  { id: 10, nombre: 'Vela pesquera grande', cat: 'velas', precio: 30000, img: '/Fundacion Aprender/assets/vela pesquera grande.jpeg' },
+  { id: 10, nombre: 'Vela pesquera grande', cat: 'velas', precio: 30000, img: '/Fundacion Aprender/assets/vela pescera grande.jpeg' },
 
   { id: 11, nombre: 'Pulsera artesanal', cat: 'pulseras', precio: 15000, img: '/Fundacion Aprender/assets/pulseras.jpeg' },
   { id: 12, nombre: 'Collar artesanal', cat: 'collares', precio: 22000, img: '/Fundacion Aprender/assets/Bisuteria.jpeg' },
   { id: 13, nombre: 'Aretes artesanales', cat: 'aretes', precio: 12000, img: '/Fundacion Aprender/assets/figuras.jpeg' },
 
   { id: 14, nombre: 'Adornos de madera', cat: 'maderas', precio: 20000, img: '/Fundacion Aprender/assets/adornos de maderas armables.jpeg' },
-  { id: 15, nombre: 'Caja de madera pequeña', cat: 'maderas', precio: 18000, img: '/Fundacion Aprender/assets/caja de madera pequena.jpeg' },
+  { id: 15, nombre: 'Caja de madera pequeña', cat: 'maderas', precio: 18000, img: '/Fundacion Aprender/assets/caja de madera pequeña.jpeg' },
   { id: 16, nombre: 'Caja de madera estándar', cat: 'maderas', precio: 22000, img: '/Fundacion Aprender/assets/caja de madera.jpeg' },
   { id: 17, nombre: 'Caja de madera tipo vino', cat: 'maderas', precio: 26000, img: '/Fundacion Aprender/assets/caja de madera de vino.jpeg' },
   { id: 18, nombre: 'Cajón de madera', cat: 'maderas', precio: 30000, img: '/Fundacion Aprender/assets/cajon de madera.jpeg' },
-  { id: 19, nombre: 'Cajones pequeños de madera', cat: 'maderas', precio: 28000, img: '/Fundacion Aprender/assets/cajones pequenos de madera.jpeg' },
+  { id: 19, nombre: 'Cajones pequeños de madera', cat: 'maderas', precio: 28000, img: '/Fundacion Aprender/assets/cajones pequeños de madera.jpeg' },
 
   { id: 20, nombre: 'Cuadro decorativo', cat: 'cuadros', precio: 35000, img: '/Fundacion Aprender/assets/Cuadro.jpeg' },
 
-  { id: 21, nombre: 'Perfume artesanal', cat: 'perfumes', precio: 45000, img: '/Fundacion Aprender/assets/perfumes.jpeg' },
+  // Nota: no existe "perfumes.jpeg" en assets; usar imagen disponible como fallback
+  { id: 21, nombre: 'Perfume artesanal', cat: 'perfumes', precio: 45000, img: '/Fundacion Aprender/assets/Bisuteria.jpeg' },
 
   { id: 22, nombre: 'Envase de barril mediano', cat: 'velas', precio: 15000, img: '/Fundacion Aprender/assets/envase de barril mediano.jpeg' },
-  { id: 23, nombre: 'Envase de barril pequeño', cat: 'velas', precio: 12000, img: '/Fundacion Aprender/assets/envase de barril pequeno.jpeg' },
+  { id: 23, nombre: 'Envase de barril pequeño', cat: 'velas', precio: 12000, img: '/Fundacion Aprender/assets/envase de barril pequeño.jpeg' },
   { id: 24, nombre: 'Envase para vela', cat: 'velas', precio: 10000, img: '/Fundacion Aprender/assets/envase de vela.jpeg' }
 
 ];
