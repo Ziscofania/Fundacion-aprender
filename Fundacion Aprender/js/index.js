@@ -86,10 +86,17 @@ function renderCatalogo(lista = productos) {
   lista.forEach(p => {
     grid.innerHTML += `
       <article class="product-card">
-        <img src="${p.img}" alt="${p.nombre}">
-        <h4>${p.nombre}</h4>
-        <p class="price">$${p.precio.toLocaleString('es-CO')}</p>
-        <button onclick="addProduct(${p.id})">Agregar</button>
+        <div class="card-media">
+          <img src="${p.img}" alt="${p.nombre}">
+          <div class="price-badge">$${p.precio.toLocaleString('es-CO')}</div>
+        </div>
+        <div class="card-body">
+          <h4>${p.nombre}</h4>
+          <p class="cat">${p.cat}</p>
+        </div>
+        <div class="card-footer">
+          <button class="success" onclick="openPaymentChoice(${p.id})">Agregar</button>
+        </div>
       </article>
     `;
   });
@@ -103,9 +110,12 @@ function filterCat(cat) {
 // =================================================
 // AGREGAR PRODUCTO (FIX CLAVE)
 // =================================================
-function addProduct(id) {
+// Agrega un producto; pago es opcional y si no se pasa se usa `tipoPagoActual` global
+function addProduct(id, pago = null) {
   const p = productos.find(prod => prod.id === id);
   if (!p) return;
+
+  const metodo = pago || tipoPagoActual;
 
   ventas.push({
     nombre: p.nombre,
@@ -113,12 +123,42 @@ function addProduct(id) {
     cant: 1,
     precio: p.precio,
     total: p.precio,
-    pago: tipoPagoActual,
+    pago: metodo,
     fecha: new Date().toLocaleString()
   });
 
   saveVentas();
-  showToast(`✔ ${p.nombre} agregado`);
+  showToast(`✔ ${p.nombre} agregado (${metodo})`);
+}
+
+// Muestra un pequeño modal para elegir método de pago antes de agregar
+function openPaymentChoice(id) {
+  closePaymentChoice();
+  const modal = document.createElement('div');
+  modal.id = 'paymentChoice';
+  modal.className = 'modal';
+  modal.innerHTML = `
+    <div class="modal-content">
+      <h3 style="margin:0 0 8px;color:var(--verde-oscuro);">Selecciona método de pago</h3>
+      <div class="options" style="margin-top:12px;">
+        <button id="payEfectivo">Efectivo</button>
+        <button id="payTransf">Transferencia</button>
+        <button id="payCancel">Cancelar</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  // mostrar modal (usar display flex)
+  modal.style.display = 'flex';
+
+  document.getElementById('payEfectivo').onclick = () => { addProduct(id, 'efectivo'); closePaymentChoice(); };
+  document.getElementById('payTransf').onclick = () => { addProduct(id, 'transferencia'); closePaymentChoice(); };
+  document.getElementById('payCancel').onclick = closePaymentChoice;
+}
+
+function closePaymentChoice() {
+  const el = document.getElementById('paymentChoice');
+  if (el) el.remove();
 }
 
 // =================================================
